@@ -3,37 +3,36 @@ let id = 21
 
 module.exports = {
     getEmployees: (req, res) => {
-        res.status(200).send(employees)
+        const db = req.app.get('db')
+        db.get_employees().then(employees => {
+            res.status(200).send(employees)
+        }).catch(err => res.status(500).send(err))
     },
 
     editEmployee: (req, res) => {
+        console.log(req.params)
+        const db = req.app.get('db')
         const {id} = req.params
-        const index = employees.findIndex(person => person.id === +id)
-        employees.splice(index, 1, req.body)
-        console.log(employees)
-        res.status(200).send(employees)
+        const {first, last, email, gender} = req.body
+        db.put_employees([id, first, last, email, gender]).then(employees => {
+            res.status(200).send(employees)
+        }).catch(err => res.status(500).send(err))
     },
 
     addEmployee: (req, res) => {
-        console.log('req.body', req.body)
-        const {firstName, lastName, email, gender} = req.body
-        const newEmployee = {
-            id,
-            firstName,
-            lastName,
-            email,
-            gender
-        }
-        id++
-        employees.push(newEmployee)
-        res.status(200).send(employees)
+        const db = req.app.get('db')
+        const {first, last, email, gender} = req.body
+        db.post_employees([first, last, email, gender]).then(employees => {
+            res.status(200).send(employees)
+        }).catch(err => res.status(500).send(err))
     },
 
     deleteEmployee: (req, res) => {
+        console.log(req.params)
+        const db = req.app.get('db')
         const {id} = req.params
-        const index = employees.findIndex(person => person.id === +id)
-        employees.splice(index, 1)
-        console.log(employees)
-        res.status(200).send(employees)
+        db.delete_employees(id).then(employees => {
+            res.status(200).send(employees)
+        }).catch(err => res.status(500).send(err))
     }
 }

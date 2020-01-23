@@ -6,8 +6,8 @@ class EmployeeHighlights extends Component {
 		super(props);
 		console.log(props);
 		this.state = {
-			firstNameInput: props.firstName,
-			lastNameInput: props.lastName,
+			firstInput: props.first,
+			lastInput: props.last,
 			emailInput: props.email,
 			genderInput: props.gender,
 			id: props.id,
@@ -17,11 +17,11 @@ class EmployeeHighlights extends Component {
 	}
 
 	componentDidUpdate(prevProps) {
-		if (prevProps.firstName !== this.props.firstName) {
+		if (prevProps.first !== this.props.first) {
             console.log('HIt Update!')
 			this.setState({
-				firstNameInput: this.props.firstName,
-				lastNameInput: this.props.lastName,
+				firstInput: this.props.first,
+				lastInput: this.props.last,
 				emailInput: this.props.email,
 				genderInput: this.props.gender,
 				id: this.props.id,
@@ -48,8 +48,8 @@ class EmployeeHighlights extends Component {
     addEmployee = state => {
         if(this.state.editing === false){
             this.setState({
-                firstNameInput: '',
-                lastNameInput: '',
+                firstInput: '',
+                lastInput: '',
                 emailInput: '',
                 genderInput: '',
                 id: 0,
@@ -59,8 +59,8 @@ class EmployeeHighlights extends Component {
         } else {
             this.flipEdit()
             const newEmployee = {
-                firstName: state.firstNameInput,
-                lastName: state.lastNameInput,
+                first: state.firstInput,
+                last: state.lastInput,
                 email: state.emailInput,
                 gender: state.genderInput,
                 id: state.id
@@ -72,8 +72,8 @@ class EmployeeHighlights extends Component {
 	editEmployee = state => {
 		this.flipEdit();
 		const updatedEmployee = {
-			firstName: state.firstNameInput,
-			lastName: state.lastNameInput,
+			first: state.firstInput,
+			last: state.lastInput,
 			email: state.emailInput,
 			gender: state.genderInput,
 			id: state.id
@@ -82,10 +82,10 @@ class EmployeeHighlights extends Component {
 	};
 
 	render() {
-		const { firstName, lastName, id, email, gender } = this.props;
+		const { first, last, id, email, gender } = this.props;
 		const {
-			firstNameInput,
-			lastNameInput,
+			firstInput,
+			lastInput,
 			emailInput,
 			genderInput,
 			editing
@@ -102,7 +102,7 @@ class EmployeeHighlights extends Component {
 					<div className="outside-container">
 						<div>
 							<h2>
-								{firstName} {lastName}
+								{first} {last}
 							</h2>
 							<p>Employee Id: {id}</p>
 							<p>Email: {email}</p>
@@ -130,14 +130,14 @@ class EmployeeHighlights extends Component {
 					<div className="outside-container">
 						<div>
 							<input
-								name="firstNameInput"
-								value={firstNameInput}
+								name="firstInput"
+								value={firstInput}
 								onChange={e => this.handleChange(e)}
 								placeholder="First Name"
 							/>
 							<input
-								name="lastNameInput"
-								value={lastNameInput}
+								name="lastInput"
+								value={lastInput}
 								onChange={e => this.handleChange(e)}
 								placeholder="Last Name"
 							/>
@@ -171,14 +171,14 @@ class EmployeeHighlights extends Component {
                     <div className="outside-container">
                         <div>
                             <input
-                                name="firstNameInput"
-                                value={firstNameInput}
+                                name="firstInput"
+                                value={firstInput}
                                 onChange={e => this.handleChange(e)}
                                 placeholder="First Name"
                             />
                             <input
-                                name="lastNameInput"
-                                value={lastNameInput}
+                                name="lastInput"
+                                value={lastInput}
                                 onChange={e => this.handleChange(e)}
                                 placeholder="Last Name"
                             />
